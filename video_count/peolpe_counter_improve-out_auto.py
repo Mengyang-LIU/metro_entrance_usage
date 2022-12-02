@@ -1,4 +1,3 @@
-#导入需要的包
 import numpy as np
 import cv2
 import Person
@@ -21,21 +20,21 @@ def face_count(file_name,file_dir):
     val = []
 
     video = cv2.VideoCapture(file_name)
-    # 输出视频
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')  # 输出视频制编码
+    # export the video
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')  # video coding
     out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))
 
     w = video.get(3)
     h = video.get(4)
-    print("视频的原宽度为:")
+    print("Width of the original video:")
     print(int(w))
-    print("视频的原高度为:")
+    print("Height of the original video:")
     area = h * w
     print(int(h))
     areaTHreshold = area / 500
     print('Area Threshold', areaTHreshold)
 
-    # 计算画线的位置
+    # calculate the position of "line"
     line_up = int(2 * (h / 4))
     line_down = int(2.7 * (h / 4))
     up_limit = int(1.5 * (h / 4))
@@ -62,7 +61,7 @@ def face_count(file_name,file_dir):
     pt8 = [w, down_limit]
     pts_L4 = np.array([pt7, pt8], np.int32)
     pts_L4 = pts_L4.reshape((-1, 1, 2))
-    # 背景剔除
+    # subtract the background
     # fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = True)
     fgbg = cv2.createBackgroundSubtractorKNN()
     # 用于后面形态学处理的核
@@ -104,8 +103,8 @@ def face_count(file_name,file_dir):
         # 找到边界
         _, contours0, hierarchy = cv2.findContours(mask2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for cnt in contours0:
-            rect = cv2.boundingRect(cnt)  # 矩形边框
-            area = cv2.contourArea(cnt)  # 每个矩形框的面积
+            rect = cv2.boundingRect(cnt)  # rectangle boundary
+            area = cv2.contourArea(cnt)  # area of each rectangle boundary
             if area > areaTHreshold:
                 # ************************************************
                 # moments里包含了许多有用的信息
@@ -187,7 +186,7 @@ def face_count(file_name,file_dir):
     cv2.destroyAllWindows()
 
 #全局变量
-file_dir = "E:/tongji/可区分/人民广场出入口16-2" \
+file_dir = "E:../人民广场出入口16-2" \
            ""
 for name in os.listdir(file_dir):
     file_name = name
