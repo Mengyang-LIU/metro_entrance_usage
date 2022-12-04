@@ -1,6 +1,6 @@
 # metro_entrance_usage
 
-![](https://github.com/Mengyang-LIU/metro_entrance_usage/blob/main/Artboard%202.jpg)
+![](https://github.com/Mengyang-LIU/metro_entrance_usage/blob/main/Artboard%203.jpg)
 
 This project tried to understand which land use affected the entrances usage.
 
