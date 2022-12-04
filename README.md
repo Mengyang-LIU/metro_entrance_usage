@@ -1,5 +1,7 @@
 # metro_entrance_usage
 
+![](https://github.com/Mengyang-LIU/metro_entrance_usage/blob/main/Artboard%202.jpg)
+
 This project tried to understand which land use affected the entrances usage.
 
 1. Estimated the entrance usage by counting the in and out passengers from the entrance surveillance video.
