@@ -73,7 +73,7 @@ def face_count(file_name,file_dir):
         ret, frame = video.read()
         if frame is None:
             break
-        # 应用背景剔除
+        # remove background
         gray = cv2.GaussianBlur(frame, (31, 31), 0)
         # cv2.imshow('GaussianBlur', frame)
         # cv2.imshow('GaussianBlur', gray)
@@ -82,14 +82,14 @@ def face_count(file_name,file_dir):
 
         try:
             # ***************************************************************
-            # 二值化
+            # binarize
             ret, imBin = cv2.threshold(fgmask, 200, 255, cv2.THRESH_BINARY)
             ret, imBin2 = cv2.threshold(fgmask2, 200, 255, cv2.THRESH_BINARY)
             # cv2.imshow('imBin', imBin2)
-            # 开操作(腐蚀->膨胀)消除噪声
+            # opening operation(erosion->dilution)remove the noise
             mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kerne3)
             mask2 = cv2.morphologyEx(imBin2, cv2.MORPH_OPEN, kerne3)
-            # 闭操作(膨胀->腐蚀)将区域连接起来
+            # closing operation (dilution->erosion)connect the area
             mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kerne3)
             mask2 = cv2.morphologyEx(mask2, cv2.MORPH_CLOSE, kerne3)
             # cv2.imshow('closing_mask', mask2)
@@ -100,16 +100,15 @@ def face_count(file_name,file_dir):
             print('OUT:', cnt_in + count_in)
             break
 
-        # 找到边界
+        # find the boundary
         _, contours0, hierarchy = cv2.findContours(mask2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
         for cnt in contours0:
             rect = cv2.boundingRect(cnt)  # rectangle boundary
             area = cv2.contourArea(cnt)  # area of each rectangle boundary
             if area > areaTHreshold:
-                # ************************************************
                 # moments里包含了许多有用的信息
                 M = cv2.moments(cnt)
-                cx = int(M['m10'] / M['m00'])  # 计算重心
+                cx = int(M['m10'] / M['m00'])  # calculate the centroid
                 cy = int(M['m01'] / M['m00'])
                 x, y, w, h = cv2.boundingRect(cnt)  # x,y为矩形框左上方点的坐标，w为宽，h为高
                 new = True
@@ -139,7 +138,6 @@ def face_count(file_name,file_dir):
                                     print("Out:执行了count+1")
                                 print("ID:", i.getId(), 'crossed the exit at', time.strftime("%c"))
                             break
-                            # 状态为1表明？？？
                         if i.getState() == '1':
                             if i.getDir() == 'down' and i.getY() > down_limit:
                                 i.setDone()
