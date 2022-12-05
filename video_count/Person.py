@@ -3,7 +3,6 @@ import time
 
 class MyPerson:
     tracks = []
-    #MyPerson类
     def __init__(self, i, xi, yi, max_age):
         self.i = i
         self.x = xi
@@ -45,7 +44,7 @@ class MyPerson:
     def going_UP(self,mid_start,mid_end):
         if len(self.tracks) >= 2:
             if self.state == '0':
-                if self.tracks[-1][1] < mid_end and self.tracks[-2][1] >= mid_end: #cruzo la linea
+                if self.tracks[-1][1] < mid_end and self.tracks[-2][1] >= mid_end: 
                     state = '1'
                     self.dir = 'up'
                     return True
