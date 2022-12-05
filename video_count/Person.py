@@ -30,13 +30,12 @@ class MyPerson:
         return self.x
     def getY(self):
         return self.y
-    #更新位置
+    #update the position
     def updateCoords(self, xn, yn):
         self.age = 0
         self.tracks.append([self.x,self.y])
         self.x = xn
         self.y = yn
-    #
     def setDone(self):
         self.done = True
     def timedOut(self):
