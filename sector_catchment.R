@@ -3,16 +3,15 @@ library(rgeos)
 library(sf)
 library(lwgeom)
 library(tmap)
-setwd("/Users/liumengyang/OneDrive/sh_metro")
+setwd("/Users/../sh_metro")
 getwd()
 
-angle = 120
+angle = 120 # set sector angles 90,120,150
 Start_OD = st_read("shanxinan_s_od.shp") 
 Start_OD = cleaned_od(Start_OD)
 #End_OD = st_read("shanxinan_e_od.shp") 
 #End_OD = cleaned_od(End_OD)
 shanxi_exit = st_read('shanxinan_exit.shp')
-
 
 shanxi_s_sector  = start_od_sel_sector(Start_OD,shanxi_exit,angle)
 #shanxi_e_sector  = end_od_sel_sector(End_OD,shanxi_exit,angle)
@@ -32,15 +31,11 @@ Start_OD = cleaned_od(Start_OD)
 #End_OD = st_read("jiangsu_e_od.shp") 
 #End_OD = cleaned_od(End_OD)
 
-
 jiangsu_exit = st_read('jiangsu_exit.shp')
-
 
 #End_OD = cleaned_od(End_OD)
 jiangsu_s_sector  = start_od_sel_sector(Start_OD,jiangsu_exit,angle)
 #jiangsu_e_sector  = end_od_sel_sector(End_OD,jiangsu_exit,angle)
-
-
 
 tm_shape(renmin_exit$geometry, bbox = bbox_new)+ tm_sf(col = "red") + tm_shape(renmin_s_sector[[2]])+ tm_polygons(alpha = 0.3)+
   tm_shape(renmin_s_sector[[3]])+ tm_polygons(alpha = 0.3)+tm_shape(renmin_s_sector[[4]])+ tm_polygons(alpha = 0.3)+
