@@ -2,7 +2,7 @@ library(tidyverse)
 library(dplyr)
 library(leaps)
 library(car)
-setwd("/Users/liumengyang/OneDrive/sh_metro")
+setwd("/Users/../sh_metro")
 getwd()
 # dataframe for regression analysis
 # 横轴时间， 纵轴出口编号
