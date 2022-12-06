@@ -2,7 +2,7 @@ library(sf)
 library(lubridate)
 
 
-setwd("/Users/liumengyang/OneDrive/sh_metro")
+setwd("/Users/../sh_metro")
 getwd()
 
 start_od = st_read("start_OD.shp") 
